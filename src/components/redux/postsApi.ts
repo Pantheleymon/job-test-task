@@ -1,10 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-
-interface IPost {
-    id: string;
-    title: string;
-    body: string;
-}
+import { IPost } from '../types/types';
 
 export const postsApi = createApi({
     reducerPath: 'postsApi',
@@ -14,7 +9,7 @@ export const postsApi = createApi({
             query: () => `posts`,
         }),
         getPostById: builder.query<IPost, number | string | undefined>({
-            query: (id) => `posts/${id}`,
+            query: (id = 1) => `posts/${id}`,
         })
     })
 });
