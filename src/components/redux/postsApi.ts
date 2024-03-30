@@ -13,10 +13,10 @@ export const postsApi = createApi({
         getPosts: builder.query<Array<IPost>, {}>({
             query: () => `posts`,
         }),
-        getPostById: builder.query<IPost, number>({
+        getPostById: builder.query<IPost, number | string | undefined>({
             query: (id) => `posts/${id}`,
         })
     })
 });
 
-export const {useGetPostsQuery, useLazyGetPostByIdQuery} = postsApi;
+export const {useGetPostsQuery, useGetPostByIdQuery} = postsApi;
