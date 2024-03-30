@@ -1,8 +1,8 @@
-import styles from './Spinner.modules.css';
+import './spinner.css';
 
 const Spinner = () => {
     return (
-        <span className={styles.loader}></span>
+        <span className="spinner"></span>
     );
 };
 
