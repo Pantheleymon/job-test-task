@@ -13,8 +13,6 @@ const PostsList = () => {
 
     const dispatch = useDispatch();
 
-    const {postsStatus, posts} = useSelector((state:IRootState) => state.posts);
-
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(response => response.json())
@@ -22,6 +20,8 @@ const PostsList = () => {
                 dispatch(addPost(item))
             }));
     }, []);
+
+    const {postsStatus, posts} = useSelector((state:IRootState) => state.posts);
 
     const filteredPosts = posts
                             .filter((item:IPost) => {

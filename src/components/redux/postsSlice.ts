@@ -28,7 +28,7 @@ const postsSlice = createSlice({
             state.postsStatus = 'fetched';
         },
         updatePost(state, action) {
-            state.posts.map((item) => item.id == action.payload.id ? action.payload.reaction : item)
+            state.posts.filter((item) => item.id == action.payload.id)[0].reaction = action.payload.userReaction;
         }
     },
 });
