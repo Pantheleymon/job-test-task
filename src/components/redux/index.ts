@@ -1,2 +1,2 @@
-export * from './postsApi';
+export * from './postsSlice'
 export * from './store';

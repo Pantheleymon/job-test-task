@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { postsApi } from "./postsApi";
+import postsReducer from './postsSlice'
 
 export const store = configureStore({
     reducer: {
-        [postsApi.reducerPath]: postsApi.reducer,
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(postsApi.middleware)
+        posts: postsReducer,
+    }
 });
+
+export type IRootState = ReturnType<typeof store.getState>

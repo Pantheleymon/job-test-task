@@ -1,42 +1,44 @@
-import { Link } from "react-router-dom";
-import { useGetPostsQuery } from "../redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { IRootState } from "../redux";
+
 import Spinner from "../spinner/Spinner";
-import { useState } from "react";
+import PostsListItem from "../postsListItem/PostsListItem";
+import { IPost } from "../types/types";
+import { addPost } from "../redux/postsSlice";
 
 const PostsList = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    const {data = [], isLoading, isError} = useGetPostsQuery('/');
+    const dispatch = useDispatch();
 
-    if (isLoading) {
-      return <Spinner/>
-    }
-    if (isError) {
-      return <>'Ошибка загрузки'</>;
-    }
+    const {postsStatus, posts} = useSelector((state:IRootState) => state.posts);
 
-    const filteredPosts = data
-                            .filter((item) => {
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => response.json())
+            .then(json => json.map((item:IPost) => {
+                dispatch(addPost(item))
+            }));
+    }, []);
+
+    const filteredPosts = posts
+                            .filter((item:IPost) => {
                                 return item.title.includes(searchTerm);
                             })
-                            .map((item) => {
+                            .map((item:IPost, index) => {
                                 return (
-                                <div key={item.id}>
-                                    <Link to={`/posts/${item.id}`}>
-                                    <img src="https://placehold.co/600x400/orange/white" alt={item.title} />
-                                    <h2>{item.title}</h2>
-                                    <p>{item.body}</p>
-                                    </Link>
-                                </div>
+                                    <PostsListItem {...item} key={index}/>
                                 )
                             });
                         
   
     return (
       <>
-      <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}/>
+        <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}/>
 
-      {filteredPosts}
+        {filteredPosts}
       
       </>
     );

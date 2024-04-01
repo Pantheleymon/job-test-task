@@ -1,29 +1,25 @@
-import { FC, useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { IRootState } from "../redux";
-import { IPost } from "../types/types";
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const SinglePost:FC = () => {
+import { IPost } from "../types/types";
 
-    const [userReaction, setUserReaction] = useState<string>('');
+import { useDispatch } from "react-redux";
 
-    const {id} = useParams<string>();
+import { updatePost } from "../redux/postsSlice";
 
-    const posts = useSelector<IRootState, IPost[]>((state) => state.posts.posts);
+const PostsListItem:FC<IPost> = ({id, title, body, reaction, likes, dislikes}) => {
 
-    if (!id) {
-        return (<></>);
-    }
+    const [userReaction, setUserReaction] = useState<string>(reaction);
 
-    const {title, body, reaction, likes, dislikes} = posts[+id - 1];
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(updatePost({id, userReaction}))
+    }, [userReaction])
 
     return (
+
         <div>
-            <Link to={'/'}>
-                Вернуться
-            </Link>
             <img src="https://placehold.co/600x400/orange/white" alt={title} />
             <h2>{title}</h2>
             <p>{body}</p>
@@ -51,8 +47,11 @@ const SinglePost:FC = () => {
                     { userReaction === 'dislike' ? dislikes + 1 : dislikes }
                 </div>
             </div>
+            <Link to={`/posts/${id}`}>
+                    Читать далее
+            </Link>
         </div>
     );
 };
 
-export default SinglePost;
+export default PostsListItem;
