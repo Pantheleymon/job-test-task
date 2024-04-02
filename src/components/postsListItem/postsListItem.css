@@ -1,0 +1,137 @@
+.post {
+    /* max-width: 558px;
+    width: 558px; */
+
+    border: 1px solid #F4F4F4;
+
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+
+
+    box-shadow: 0 2px 6px 0 #0000000A;
+
+    flex: 1 0 558px;
+}
+
+.post:first-of-type {
+    flex: 0 1 100%;
+
+    position: relative;
+}
+
+.post:first-of-type .post__information_title{
+    max-width: 960px;
+}
+
+.post:first-of-type .post__information_text{
+    display: block;
+
+    margin-top: 32px;
+
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+
+}
+
+.post:first-of-type .post__actions {
+    justify-content: flex-end;
+}
+
+.post:first-of-type .post__reactions_flex {
+    position: absolute;
+    bottom: 195px;
+    right: 0;
+}
+
+.post_image {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+}
+
+.post__information {
+    padding: 24px 16px 32px 16px;
+}
+
+.post__information_title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32px;
+    text-align: left;
+}
+
+.post__information_text {
+    display: none;
+}
+
+.post__actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 24px;
+}
+
+.post__reactions_flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.post__reactions_item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-right: 24px;
+
+    cursor: pointer;
+}
+
+.post__reactions_item_icon {
+    margin-right: 8px;
+}
+
+.post__reactions_item_text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+
+    color: #4F4F4F;
+}
+
+.post__link {
+    display: block;
+
+    text-decoration: none;
+    color: #0A0A0A;
+    font-size: 16px;
+    line-height: 18.75px;
+    font-weight: 400;
+
+    padding: 14px 24px 12px 24px;
+
+    border: 2px solid #0A0A0A;
+    border-radius: 60px;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    -ms-border-radius: 60px;
+    -o-border-radius: 60px;
+
+    background-color: transparent;
+
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+}
+
+.post__link:hover {
+    background-color: #0A0A0A;
+    color:white
+}
