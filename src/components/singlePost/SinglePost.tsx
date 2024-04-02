@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { IRootState, updatePost } from "../redux";
+import { IRootState, addPost, updatePost } from "../redux";
 import { IPost } from "../types/types";
 import { Link } from "react-router-dom";
 
@@ -11,12 +11,30 @@ const SinglePost:FC = () => {
 
     const dispatch = useDispatch();
 
-    const {id} = useParams<string>();
+    const postsData = useSelector<IRootState, IPost[]>((state) => state.posts.posts);
 
-    const posts = useSelector<IRootState, IPost[]>((state) => state.posts.posts);
+    const [posts, setPosts] = useState(postsData)
+
+    useEffect(() => {
+        if (posts.length == 0) {
+            fetch('https://jsonplaceholder.typicode.com/posts')
+                .then(response => response.json())
+                .then(json => json.map((item:IPost) => {
+                    dispatch(addPost(item))
+                }));
+
+            setPosts(postsData);
+        }
+    }, [postsData])
+
+    const {id} = useParams<string>();
 
     if (!id) {
         return (<></>);
+    }
+
+    if (posts.length == 0) {
+        return (<>Ошибка</>);
     }
 
     const handleClick = (userReaction:string) => {
@@ -28,7 +46,7 @@ const SinglePost:FC = () => {
         }
     }
 
-    const {title, body, reaction, likes, dislikes} = posts[+id - 1];
+    const {title, body, reaction, likes, dislikes} = postsData[+id - 1];
 
     return (
         <div className="container">
