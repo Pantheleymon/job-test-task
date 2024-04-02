@@ -1,6 +1,6 @@
 import { FC, Suspense } from "react";
 import PostsList from "../postsList/PostsList";
-import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Spinner from "../spinner/Spinner";
 import SinglePost from "../singlePost/SinglePost";
 

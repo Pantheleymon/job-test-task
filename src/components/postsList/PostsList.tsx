@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { IRootState } from "../redux";
 
-import Spinner from "../spinner/Spinner";
 import PostsListItem from "../postsListItem/PostsListItem";
 import { IPost } from "../types/types";
 import { addPost } from "../redux/postsSlice";
